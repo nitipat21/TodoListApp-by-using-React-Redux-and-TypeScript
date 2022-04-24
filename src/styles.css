@@ -17,6 +17,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    letter-spacing: 0.05rem;
 }
 
 html{
@@ -30,12 +31,6 @@ body{
     height: 100%;
 }
 
-main{
-    width: 80%;
-    margin: 2rem auto;
-    background-color: var(--lessbright-White);
-}
-
 img{
     max-width: 100%;
     max-height: 100%;
@@ -46,9 +41,12 @@ img{
     display: flex;
     justify-content: center;
     min-height: 80vh;
+    width: 80%;
+    margin: 2rem auto;
     font-size: clamp(1.5rem, 2.5vw, 4rem);
     border-radius: 1rem;
     box-shadow: 0px 0px 10px 2px var(--lessdark-Black);
+    background-color: var(--lessbright-White);
 }
 
 .homePage-containter{
@@ -64,7 +62,6 @@ img{
 
 .inputText-container{
     display: flex;
-    flex-direction: column;
     gap: 0.5rem;
 }
 
@@ -90,26 +87,45 @@ img{
 /* close HomePage styles */
 
 .todoPage{
-    font-size: clamp(1rem, 1vw, 2rem);
-    border-radius: 1rem;
+    font-size: clamp(1rem, 2.5vw, 2rem);
     box-shadow: 0px 0px 10px 2px var(--lessdark-Black);
 }
 
 .todoPage-container{
-    padding: 2rem;
+    width: 100%;
 }
 
-.greeting{
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: var(--lessbright-White);
+    width: 100%;
+    padding: 1rem;
+    column-gap: 0.5rem;
+    row-gap: 1rem;
+}
+
+nav > div:last-child > input{
+    text-align: center;
+    width: 24ch;
+}
+
+.greeting-container{
     text-align: center;
 }
 
 .greeting h1{
     color: var(--lessdark-Black);
+    font-size: clamp(1rem, 2.5vw, 2rem);
     font-weight: 400;
 }
 
 .username{
     text-decoration: underline;
     font-weight: 700;
-    padding: 0 0.5rem;
 }
+
+
+

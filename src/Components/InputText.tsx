@@ -11,8 +11,7 @@ const InputText:React.FC<inputTextInterface> = ({state, useState,label}) => {
   return (
 
     <div className='inputText-container'>
-      <label htmlFor='inputText'>{label}</label>
-      <input id='inputText'type='text' onChange={(event)=> useState(event.target.value)} value={state}/>
+      <input id='inputText'type='text' onChange={(event)=> useState(event.target.value)} value={state} placeholder={label}/>
     </div>
 
   );

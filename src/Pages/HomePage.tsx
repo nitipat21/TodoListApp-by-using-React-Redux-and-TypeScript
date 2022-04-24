@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ButtonComponent from '../Components/buttonComponent';
+import ButtonComponent from '../Components/button';
 import InputText from '../Components/InputText';
 import { useNavigate } from 'react-router-dom'
 
@@ -10,25 +10,25 @@ const HomePage:React.FC = () => {
 
     function saveUserName() {
         if (username) {
-            localStorage.setItem("username", username);
+            localStorage.setItem('username', username);
             navigate('/todoApp');
         } else {
-            alert("please type your name")
+            alert('please type your name')
         }
     };
     
     return (
         
         <main className='homePage'>
-            <div className="homePage-containter">
+            <div className='homePage-containter'>
                 <div className='header'>
                     <h1>To Do App</h1>
                 </div>
                 <div className='paragraph'>
                     <p>This App made by using React + TypeScript + Pure CSS</p>
                 </div>
-                <InputText state={username} useState={setUsername} label="Username:"/>
-                <ButtonComponent text="Enter" onClick={saveUserName}/>
+                <InputText state={username} useState={setUsername} label='Username'/>
+                <ButtonComponent text='Enter' onClick={saveUserName}/>
             </div>
         </main>
     );

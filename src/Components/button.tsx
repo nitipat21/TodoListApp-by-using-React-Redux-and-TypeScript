@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-export interface ButtonComponentInterface {
+export interface ButtonInterface {
     text:string;
     onClick:React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const ButtonComponent:React.FC<ButtonComponentInterface> = ({text,onClick}) => {
+const Button:React.FC<ButtonInterface> = ({text,onClick}) => {
 
   return (
 
@@ -16,4 +16,4 @@ const ButtonComponent:React.FC<ButtonComponentInterface> = ({text,onClick}) => {
   );
 }
 
-export default ButtonComponent;
+export default Button;

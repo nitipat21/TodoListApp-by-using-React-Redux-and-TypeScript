@@ -1,18 +1,19 @@
 import * as React from 'react';
+import GreetingComponent from '../Components/greetingText';
+import InputText from '../Components/InputText';
 
 const TodoPage:React.FC = () => {
 
-  
+  const [todo,setTodo] = React.useState<string>("");
 
   return (
       
-    <main className="todoPage">
-        <div className="todoPage-container">
-          <div className="greeting">
-            <h1>Hi,
-              <span className='username'>{ localStorage.getItem("username") ? localStorage.getItem("username") : ""}</span>
-              What are gonna do today?</h1>
-          </div>
+    <main className='todoPage'>
+        <div className='todoPage-container'>
+          <nav>
+            <GreetingComponent />
+            <InputText state={todo} useState={setTodo} label='What are you gonna do?' />
+          </nav>
         </div>
     </main>
 
