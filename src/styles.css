@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap');
+
+:root{
+    --lightBlue-todo:#70d6ff;
+    --lightPink-todo:#ff70a6;
+    --lightOrange-todo:#ff9770;
+    --lightYellow-todo:#ffd670;
+    --highlightYellow-todo:#e9ff70;
+    --lessbright-White:#ffffffde;
+    --lessdark-Black:#000000de;
+    --disable-opacity: 0.6;
+}
+
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    height: 100%;
+}
+
+body{
+    background: linear-gradient(to bottom, #414345, #232526);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
+}
+
+main{
+    width: 80%;
+    margin: 2rem auto;
+    background-color: var(--lessbright-White);
+}
+
+img{
+    max-width: 100%;
+    max-height: 100%;
+}
+/* close initial setup */
+
+.homePage{
+    display: flex;
+    justify-content: center;
+    min-height: 80vh;
+    font-size: clamp(1.5rem, 2.5vw, 4rem);
+    border-radius: 1rem;
+    box-shadow: 0px 0px 10px 2px var(--lessdark-Black);
+}
+
+.homePage-containter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+
+.inputText-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.inputText-container label{
+    font-weight: 600;
+}
+
+#inputText, .Button-container button{
+    padding: 0.5rem;
+    font-size: clamp(1rem, 2.5vw, 2rem);
+    border-radius: 1rem;
+    border-color: #000000de;
+}
+
+.Button-container button{
+    font-weight: 600;
+}
+
+.Button-container button:hover{
+    background-color: var(--lessdark-Black);
+    color: var(--lessbright-White);
+}
+/* close HomePage styles */
+
+.todoPage{
+    font-size: clamp(1rem, 1vw, 2rem);
+    border-radius: 1rem;
+    box-shadow: 0px 0px 10px 2px var(--lessdark-Black);
+}
+
+.todoPage-container{
+    padding: 2rem;
+}
+
+.greeting{
+    text-align: center;
+}
+
+.greeting h1{
+    color: var(--lessdark-Black);
+    font-weight: 400;
+}
+
+.username{
+    text-decoration: underline;
+    font-weight: 700;
+    padding: 0 0.5rem;
+}
