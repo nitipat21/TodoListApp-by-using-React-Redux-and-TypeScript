@@ -65,6 +65,10 @@ img{
     gap: 0.5rem;
 }
 
+.homePage-containter > div:nth-child(3) > input{
+    width: 12ch;
+}
+
 .inputText-container label{
     font-weight: 600;
 }

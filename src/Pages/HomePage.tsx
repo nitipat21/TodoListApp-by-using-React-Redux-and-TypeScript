@@ -1,12 +1,17 @@
 import * as React from 'react';
 import ButtonComponent from '../Components/button';
 import InputText from '../Components/InputText';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const HomePage:React.FC = () => {
 
     const [username,setUsername] = React.useState<string>("");
     const navigate = useNavigate();
+
+    const state = useSelector((state) => state)
+
+    console.log(state)
 
     function saveUserName() {
         if (username) {
