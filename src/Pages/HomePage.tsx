@@ -9,10 +9,6 @@ const HomePage:React.FC = () => {
     const [username,setUsername] = React.useState<string>("");
     const navigate = useNavigate();
 
-    const state = useSelector((state) => state)
-
-    console.log(state)
-
     function saveUserName() {
         if (username) {
             localStorage.setItem('username', username);
