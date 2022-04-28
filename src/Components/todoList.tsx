@@ -1,11 +1,15 @@
 import * as React from 'react';
 
- const TodoList:React.FC = () => {
+interface todoListInterface{
+  doCardElement:JSX.Element[]
+}
+
+ const TodoList:React.FC<todoListInterface> = (props) => {
 
   return (
 
     <div className='todoList-container'>
-        <h1>do card</h1>    
+        {props.doCardElement}
     </div>
 
   );

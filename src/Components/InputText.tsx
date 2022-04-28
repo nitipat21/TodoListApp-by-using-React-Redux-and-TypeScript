@@ -3,7 +3,7 @@ import * as React from 'react';
 export interface inputTextInterface {
   state:string;
   useState:React.Dispatch<React.SetStateAction<string>>;
-  label:string
+  label:string;
 }
 
 const InputText:React.FC<inputTextInterface> = ({state, useState,label}) => {
