@@ -6,7 +6,15 @@ import { doItem } from '../store';
   return (
 
     <div className='doCard-container'>
-        {<h1>{props.do}</h1>}
+      <div className="doCard-doText">
+        <h1>{props.do}</h1>
+      </div>
+      <div className="doCard-button">
+        <button>StartDo</button>
+        <button>Done</button>
+        <button>Edit</button>
+        <button>Remove</button>
+      </div>
     </div>
 
   );

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Components/button';
 import DoCard from '../Components/doCard';
+import DoneList from '../Components/doneList';
 import GreetingComponent from '../Components/greetingText';
 import InputText from '../Components/InputText';
 import TodoList from '../Components/todoList';
@@ -37,7 +38,10 @@ const TodoPage:React.FC = () => {
             <InputText state={doInput} useState={setDoInput} label='What are you gonna do?'/>
             <Button text='Add' onClick={addTodo}/>
           </nav>
-          <TodoList doCardElement={doItemsListElement}/>
+          <div className="list-container">
+            <TodoList doCardElement={doItemsListElement}/>
+            <DoneList />
+          </div>
         </div>
     </main>
 

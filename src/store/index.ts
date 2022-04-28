@@ -9,10 +9,12 @@ export interface doItem {
 
 interface todoSliceState {
     doItemsList: doItem[];
+    doneList: doItem[];
 }
 
 const initialState: todoSliceState = {
-    doItemsList: []
+    doItemsList: [],
+    doneList: []
 }
 
 

@@ -131,5 +131,34 @@ nav > div:last-child > input{
     font-weight: 700;
 }
 
+.list-container{
+    display: flex;
+    justify-content: space-around;
+}
 
+.todoList-container,.doneList-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2rem;
+}
 
+.todoList-title,.doneList-title{
+    text-align: center;
+}
+
+.doCard-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.doCard-button{
+    display: flex;
+    flex-direction: column;
+}
+
+.doCard-button button{
+    padding: 0.5rem;
+}

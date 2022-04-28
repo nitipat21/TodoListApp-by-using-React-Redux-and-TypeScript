@@ -9,7 +9,10 @@ interface todoListInterface{
   return (
 
     <div className='todoList-container'>
-        {props.doCardElement}
+      <div className="todoList-title">
+        <h1>DO LIST</h1>
+      </div>
+      {props.doCardElement}
     </div>
 
   );
