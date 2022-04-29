@@ -101,7 +101,7 @@ img{
 
 nav{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     background-color: var(--lessbright-White);
@@ -111,9 +111,14 @@ nav{
     row-gap: 1rem;
 }
 
-nav > div:last-child > input{
+nav > div:last-child > div:first-child > input{
     text-align: center;
     width: 24ch;
+}
+
+.addTodo-container{
+    display: flex;
+    gap: 0.5rem;
 }
 
 .greeting-container{
@@ -141,6 +146,7 @@ nav > div:last-child > input{
     flex-direction: column;
     width: 100%;
     padding: 2rem;
+    gap: 1rem;
 }
 
 .todoList-title,.doneList-title{
@@ -161,4 +167,20 @@ nav > div:last-child > input{
 
 .doCard-button button{
     padding: 0.5rem;
+}
+
+.lightBlue{
+    background-color: var(--lightBlue-todo);
+}
+
+.lightPink{
+    background-color: var(--lightPink-todo);
+}
+
+.lightOrange{
+    background-color: var(--lightOrange-todo);
+}
+
+.lightYellow{
+    background-color: var(--lightYellow-todo);
 }
