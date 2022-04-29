@@ -28,6 +28,7 @@ const TodoPage:React.FC = () => {
                     isDone={doitem.isDone}
                     isEdit={doitem.isEdit}
                     color={doitem.color}
+                    key={doitem.id}
             />
   });
 

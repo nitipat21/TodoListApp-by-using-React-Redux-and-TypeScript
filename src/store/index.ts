@@ -37,12 +37,15 @@ const todoSlice = createSlice({
             });
         },
         removeTodo(state,action) {
-
+            state.doItemsList = state.doItemsList.filter((item:doItem) => item.id !== action.payload ? item : "" );
         },
         editTodo(state,action) {
-
+            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isEdit:true } : item);
         },
         startTodo(state,action) {
+
+        },
+        pauseTodo(state,action) {
 
         },
         doneTodo(state,action) {
