@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-interface todoListInterface{
+export interface todoListInterface{
   doCardElement:JSX.Element[]
 }
 

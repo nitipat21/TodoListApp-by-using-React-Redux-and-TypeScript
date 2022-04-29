@@ -1,4 +1,5 @@
 import { combineReducers, configureStore, createSlice } from "@reduxjs/toolkit";
+import DoneList from "../Components/doneList";
 
 export interface doItem {
     id:number;
@@ -6,6 +7,7 @@ export interface doItem {
     isStart:boolean;
     isDone:boolean;
     isEdit:boolean;
+    isPause:boolean;
     color:number;
 }
 
@@ -33,23 +35,33 @@ const todoSlice = createSlice({
                 isStart: false,
                 isDone: false,
                 isEdit: false,
+                isPause: false,
                 color: state.doCardColorIndex < 3 ? state.doCardColorIndex += 1 : state.doCardColorIndex = 0
             });
         },
         removeTodo(state,action) {
             state.doItemsList = state.doItemsList.filter((item:doItem) => item.id !== action.payload ? item : "" );
         },
-        editTodo(state,action) {
-            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isEdit:true } : item);
+        setIsEdit(state,action) {
+            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isEdit:!item.isEdit } : item);
+        },
+        editTodo(state,action:{ type:string, payload: {id:number, newDoText:string} }) {
+            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload.id ? { ...item, do:action.payload.newDoText } : item);
         },
         startTodo(state,action) {
-
+            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isStart:true } : item);
         },
         pauseTodo(state,action) {
-
+            
         },
         doneTodo(state,action) {
+            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isDone: true } : item);
 
+            const thisItem = state.doItemsList.filter((item:doItem) => item.id === action.payload ? item : "" );
+            state.doneList.unshift(...thisItem);
+        },
+        resetTodo(state,action) {
+            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isStart:false } : item);
         }
     }
 });

@@ -151,18 +151,21 @@ nav > div:last-child > div:first-child > input{
 
 .todoList-title,.doneList-title{
     text-align: center;
+    color: var(--lessbright-White);
 }
 
 .doCard-container{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
     padding: 1rem;
 }
 
 .doCard-button{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 1rem;
 }
 
 .doCard-button button{
@@ -183,4 +186,22 @@ nav > div:last-child > div:first-child > input{
 
 .lightYellow{
     background-color: var(--lightYellow-todo);
+}
+
+.edit{
+    background-color: var(--lessdark-Black);
+    color: var(--highlightYellow-todo);
+    border-color: var(--lessdark-Black);
+    font-weight: 700;
+}
+
+.timer-button,.utility-button{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.done{
+    opacity: var(--disable-opacity);
+    z-index: -999;
 }

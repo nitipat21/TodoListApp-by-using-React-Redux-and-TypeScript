@@ -2,9 +2,11 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 
- const DoneList:React.FC = () => {
+export interface doneListInterface{
+  doneCardElement:JSX.Element[]
+}
 
-  const doneList = useSelector((state:RootState) => state.todo.doneList);
+ const DoneList:React.FC<doneListInterface> = (props) => {
 
   return (
 
@@ -12,6 +14,7 @@ import { RootState } from '../store';
          <div className="doneList-title">
            <h1>DONE LIST</h1>
         </div>
+        {props.doneCardElement}
     </div>
 
   );

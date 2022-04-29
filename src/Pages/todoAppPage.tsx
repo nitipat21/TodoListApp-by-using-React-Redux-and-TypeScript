@@ -12,6 +12,8 @@ const TodoPage:React.FC = () => {
 
   const doItemsList = useSelector((state:RootState) => state.todo.doItemsList);
 
+  const doneList = useSelector((state:RootState) => state.todo.doneList);
+
   const [doInput,setDoInput] = React.useState("");
 
   const dispatch = useDispatch();
@@ -21,14 +23,27 @@ const TodoPage:React.FC = () => {
     setDoInput("");
   };
 
-  const doItemsListElement = doItemsList.map((doitem) => {
-    return  <DoCard  id={doitem.id}
-                    do={doitem.do}
-                    isStart={doitem.isStart}
-                    isDone={doitem.isDone}
-                    isEdit={doitem.isEdit}
-                    color={doitem.color}
-                    key={doitem.id}
+  const doItemsListElement = doItemsList.map((doItem) => {
+    return  <DoCard  id={doItem.id}
+                    do={doItem.do}
+                    isStart={doItem.isStart}
+                    isDone={doItem.isDone}
+                    isEdit={doItem.isEdit}
+                    isPause={doItem.isPause}
+                    color={doItem.color}
+                    key={doItem.id}
+            />
+  });
+
+  const doneItemsListElement = doneList.map((doneItem) => {
+    return  <DoCard  id={doneItem.id}
+                    do={doneItem.do}
+                    isStart={doneItem.isStart}
+                    isDone={doneItem.isDone}
+                    isEdit={doneItem.isEdit}
+                    isPause={doneItem.isPause}
+                    color={doneItem.color}
+                    key={doneItem.id}
             />
   });
 
@@ -45,7 +60,7 @@ const TodoPage:React.FC = () => {
           </nav>
           <div className="list-container">
             <TodoList doCardElement={doItemsListElement}/>
-            <DoneList />
+            <DoneList doneCardElement={doneItemsListElement}/>
           </div>
         </div>
     </main>
