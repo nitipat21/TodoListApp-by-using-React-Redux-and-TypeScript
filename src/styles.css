@@ -205,3 +205,12 @@ nav > div:last-child > div:first-child > input{
     opacity: var(--disable-opacity);
     z-index: -999;
 }
+
+.timer{
+    display: flex;
+}
+
+.timer > span{
+    width: 100%;
+    text-align: center;
+}

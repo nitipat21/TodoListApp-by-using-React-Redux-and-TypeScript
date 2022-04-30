@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { actions, doItem } from '../store';
+import Timer from './timer';
 
 enum DoCardColor {
   lightPink,
@@ -17,7 +18,7 @@ const DoCard:React.FC<doItem> = (props) => {
 
   const [editDo,setEditDo] = React.useState<string>(props.do);
 
-  const [time,setTime] = React.useState<number>(0)
+  const [time,setTime] = React.useState<number>(props.doTime);
 
   const removeDoItem = () => {
     dispatch(actions.removeTodo(props.id))
@@ -37,7 +38,7 @@ const DoCard:React.FC<doItem> = (props) => {
 
   const doneDoItem = () => {
     if (!props.isDone) {
-      dispatch(actions.doneTodo(props.id));
+      dispatch(actions.doneTodo({id:props.id, doTime:time}));
       dispatch(actions.removeTodo(props.id));
     }
   };
@@ -57,25 +58,27 @@ const DoCard:React.FC<doItem> = (props) => {
   const resetDoItem = () => {
     if (props.isStart) {
       dispatch(actions.resetTodo(props.id));
+      setTime(0);
     }
   }
 
-  // React.useEffect(()=>{
-  //   let interval = null;
+  React.useEffect(()=>{
+    let interval:any;
+    
+    if (props.isStart && !props.isPause) {
+        interval = setInterval(()=>{
+          setTime( previousTime => previousTime + 10);
+        },10);
+    };
 
-  //   if (props.isStart) {
-  //     interval = setInterval(()=>{
-  //       setTime(previousTime => previousTime + 10);
-  //     },10);
-  //   } else {
-  //     clearInterval(interval);
-  //   }
-  //   return () => {
-  //     clearInterval(interval);
-  //   }
-  // },[props.isStart])
+    if (props.isPause) {
+      clearInterval(interval);
 
-  console.log("render")
+    };
+
+    return () => clearInterval(interval)
+
+  },[props.isStart,props.isPause])
 
   return (
 
@@ -85,8 +88,8 @@ const DoCard:React.FC<doItem> = (props) => {
       </div>
       <div className='doCard-button'>
         <div className="timer-button">
-          <button onClick={startDoItem}>{ props.isStart ? time : 'StartDo'}</button>
-          <button>PauseDo</button>
+          <button onClick={startDoItem}>{ props.isStart ?  <Timer time={time} /> : 'StartDo' }</button>
+          <button onClick={pauseDoItem}>PauseDo</button>
           <button onClick={resetDoItem}>ResetDo</button>
         </div>
         <div className="utility-button">

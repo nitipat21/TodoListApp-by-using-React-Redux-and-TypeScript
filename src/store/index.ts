@@ -8,6 +8,7 @@ export interface doItem {
     isDone:boolean;
     isEdit:boolean;
     isPause:boolean;
+    doTime:number;
     color:number;
 }
 
@@ -36,6 +37,7 @@ const todoSlice = createSlice({
                 isDone: false,
                 isEdit: false,
                 isPause: false,
+                doTime: 0,
                 color: state.doCardColorIndex < 3 ? state.doCardColorIndex += 1 : state.doCardColorIndex = 0
             });
         },
@@ -52,16 +54,15 @@ const todoSlice = createSlice({
             state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isStart:true } : item);
         },
         pauseTodo(state,action) {
-            
+            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isPause: !item.isPause } : item);
         },
-        doneTodo(state,action) {
-            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isDone: true } : item);
-
-            const thisItem = state.doItemsList.filter((item:doItem) => item.id === action.payload ? item : "" );
+        doneTodo(state,action:{ type:string, payload: {id:number, doTime:number} }) {
+            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload.id ? { ...item, isDone: true, isPause:true, doTime:action.payload.doTime } : item);
+            const thisItem = state.doItemsList.filter((item:doItem) => item.id === action.payload.id ? item : "" );
             state.doneList.unshift(...thisItem);
         },
         resetTodo(state,action) {
-            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isStart:false } : item);
+            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isStart:false, isPause:false } : item);
         }
     }
 });

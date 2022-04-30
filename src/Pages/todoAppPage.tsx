@@ -30,6 +30,7 @@ const TodoPage:React.FC = () => {
                     isDone={doItem.isDone}
                     isEdit={doItem.isEdit}
                     isPause={doItem.isPause}
+                    doTime={doItem.doTime}
                     color={doItem.color}
                     key={doItem.id}
             />
@@ -42,6 +43,7 @@ const TodoPage:React.FC = () => {
                     isDone={doneItem.isDone}
                     isEdit={doneItem.isEdit}
                     isPause={doneItem.isPause}
+                    doTime={doneItem.doTime}
                     color={doneItem.color}
                     key={doneItem.id}
             />
