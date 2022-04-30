@@ -10,6 +10,11 @@ import { actions, RootState } from '../store';
 
 const TodoPage:React.FC = () => {
 
+  const stateSave = useSelector((state:RootState)=> state.todo);
+  localStorage.setItem("state",JSON.stringify(stateSave));
+
+  const getState = localStorage.getItem("state");
+
   const doItemsList = useSelector((state:RootState) => state.todo.doItemsList);
 
   const doneList = useSelector((state:RootState) => state.todo.doneList);
@@ -48,6 +53,13 @@ const TodoPage:React.FC = () => {
                     key={doneItem.id}
             />
   });
+
+  React.useEffect(()=>{
+    const getState = localStorage.getItem("state");
+
+    getState ? console.log(JSON.parse(getState)) : "";
+
+  },[])
 
   return (
       
