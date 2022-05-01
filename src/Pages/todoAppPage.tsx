@@ -6,29 +6,35 @@ import DoneList from '../Components/doneList';
 import GreetingComponent from '../Components/greetingText';
 import InputText from '../Components/InputText';
 import TodoList from '../Components/todoList';
-import { actions, RootState } from '../store';
+import { actions, doItem, RootState } from '../store';
 
 const TodoPage:React.FC = () => {
 
-  const stateSave = useSelector((state:RootState)=> state.todo);
-  localStorage.setItem("state",JSON.stringify(stateSave));
-
-  const getState = localStorage.getItem("state");
-
+  const dispatch = useDispatch();
+  
+  if(!localStorage.getItem("todo")) {
+    localStorage.setItem("todo", JSON.stringify(useSelector((state:RootState) => state.todo)));
+  }
+  
+  const todoState = useSelector((state:RootState) => state.todo);
+  console.log(todoState)
   const doItemsList = useSelector((state:RootState) => state.todo.doItemsList);
 
   const doneList = useSelector((state:RootState) => state.todo.doneList);
 
   const [doInput,setDoInput] = React.useState("");
 
-  const dispatch = useDispatch();
-
   const addTodo = () => {
     dispatch(actions.addTodo(doInput));
     setDoInput("");
   };
 
-  const doItemsListElement = doItemsList.map((doItem) => {
+  const updateState = () => {
+    const localState = JSON.parse(localStorage.getItem("todo")|| "");
+    dispatch(actions.updateState(localState));
+  };
+
+  const doItemsListElement = doItemsList.map((doItem:doItem) => {
     return  <DoCard  id={doItem.id}
                     do={doItem.do}
                     isStart={doItem.isStart}
@@ -41,7 +47,7 @@ const TodoPage:React.FC = () => {
             />
   });
 
-  const doneItemsListElement = doneList.map((doneItem) => {
+  const doneItemsListElement = doneList.map((doneItem:doItem) => {
     return  <DoCard  id={doneItem.id}
                     do={doneItem.do}
                     isStart={doneItem.isStart}
@@ -55,10 +61,7 @@ const TodoPage:React.FC = () => {
   });
 
   React.useEffect(()=>{
-    const getState = localStorage.getItem("state");
-
-    getState ? console.log(JSON.parse(getState)) : "";
-
+    updateState();
   },[])
 
   return (

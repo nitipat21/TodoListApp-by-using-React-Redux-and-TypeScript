@@ -40,29 +40,42 @@ const todoSlice = createSlice({
                 doTime: 0,
                 color: state.doCardColorIndex < 3 ? state.doCardColorIndex += 1 : state.doCardColorIndex = 0
             });
+            localStorage.setItem("todo",JSON.stringify(state));
         },
         removeTodo(state,action) {
             state.doItemsList = state.doItemsList.filter((item:doItem) => item.id !== action.payload ? item : "" );
+            localStorage.setItem("todo",JSON.stringify(state));
         },
         setIsEdit(state,action) {
             state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isEdit:!item.isEdit } : item);
+            localStorage.setItem("todo",JSON.stringify(state));
         },
         editTodo(state,action:{ type:string, payload: {id:number, newDoText:string} }) {
             state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload.id ? { ...item, do:action.payload.newDoText } : item);
+            localStorage.setItem("todo",JSON.stringify(state));
         },
         startTodo(state,action) {
             state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isStart:true } : item);
+            localStorage.setItem("todo",JSON.stringify(state));
         },
         pauseTodo(state,action) {
             state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isPause: !item.isPause } : item);
+            localStorage.setItem("todo",JSON.stringify(state));
         },
         doneTodo(state,action:{ type:string, payload: {id:number, doTime:number} }) {
             state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload.id ? { ...item, isDone: true, isPause:true, doTime:action.payload.doTime } : item);
             const thisItem = state.doItemsList.filter((item:doItem) => item.id === action.payload.id ? item : "" );
             state.doneList.unshift(...thisItem);
+            localStorage.setItem("todo",JSON.stringify(state));
         },
         resetTodo(state,action) {
             state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isStart:false, isPause:false } : item);
+            localStorage.setItem("todo",JSON.stringify(state));
+        },
+        updateState(state,action) {
+            state.doCardColorIndex = action.payload.doCardColorIndex;
+            state.doItemsList = action.payload.doItemsList
+            state.doneList = action.payload.doneList
         }
     }
 });
