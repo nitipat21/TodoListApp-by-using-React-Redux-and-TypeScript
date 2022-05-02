@@ -51,16 +51,20 @@ const DoCard:React.FC<doItem> = (props) => {
 
   const pauseDoItem = () => {
     if (props.isStart) {
-      dispatch(actions.pauseTodo(props.id));
+      dispatch(actions.pauseTodo({id:props.id, doTime:time}));
     } 
-  }
+  };
 
   const resetDoItem = () => {
     if (props.isStart) {
       dispatch(actions.resetTodo(props.id));
       setTime(0);
     }
-  }
+  };
+
+  const updateTime = () => {
+    dispatch(actions.updateTime({id:props.id,doTime:time}));
+  };
 
   React.useEffect(()=>{
     let interval:any;
@@ -73,12 +77,15 @@ const DoCard:React.FC<doItem> = (props) => {
 
     if (props.isPause) {
       clearInterval(interval);
-
     };
 
     return () => clearInterval(interval)
 
-  },[props.isStart,props.isPause])
+  },[props.isStart,props.isPause]);
+
+  React.useEffect(()=>{
+    updateTime();
+  },[time])
 
   return (
 

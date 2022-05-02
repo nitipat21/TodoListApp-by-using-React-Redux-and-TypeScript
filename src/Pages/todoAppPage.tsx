@@ -15,9 +15,7 @@ const TodoPage:React.FC = () => {
   if(!localStorage.getItem("todo")) {
     localStorage.setItem("todo", JSON.stringify(useSelector((state:RootState) => state.todo)));
   }
-  
-  const todoState = useSelector((state:RootState) => state.todo);
-  console.log(todoState)
+
   const doItemsList = useSelector((state:RootState) => state.todo.doItemsList);
 
   const doneList = useSelector((state:RootState) => state.todo.doneList);

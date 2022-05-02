@@ -58,8 +58,8 @@ const todoSlice = createSlice({
             state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isStart:true } : item);
             localStorage.setItem("todo",JSON.stringify(state));
         },
-        pauseTodo(state,action) {
-            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isPause: !item.isPause } : item);
+        pauseTodo(state,action:{ type:string, payload: {id:number, doTime:number} }) {
+            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload.id ? { ...item, isPause: !item.isPause, doTime:action.payload.doTime } : item);
             localStorage.setItem("todo",JSON.stringify(state));
         },
         doneTodo(state,action:{ type:string, payload: {id:number, doTime:number} }) {
@@ -69,13 +69,17 @@ const todoSlice = createSlice({
             localStorage.setItem("todo",JSON.stringify(state));
         },
         resetTodo(state,action) {
-            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isStart:false, isPause:false } : item);
+            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isStart:false, isPause:false, doTime:0 } : item);
             localStorage.setItem("todo",JSON.stringify(state));
         },
         updateState(state,action) {
             state.doCardColorIndex = action.payload.doCardColorIndex;
             state.doItemsList = action.payload.doItemsList
             state.doneList = action.payload.doneList
+        },
+        updateTime(state,action:{ type:string, payload: {id:number, doTime:number} }) {
+            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload.id ? {...item, doTime:action.payload.doTime} : item);
+            localStorage.setItem("todo",JSON.stringify(state));
         }
     }
 });
