@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Button from '../Components/button';
+import TodoInput from '../Components/todoInput';
 import DoCard from '../Components/doCard';
 import DoneList from '../Components/doneList';
 import GreetingComponent from '../Components/greetingText';
-import InputText from '../Components/InputText';
+import Option from '../Components/options';
 import TodoList from '../Components/todoList';
 import { actions, doItem, RootState } from '../store';
 
@@ -12,23 +12,16 @@ const TodoPage:React.FC = () => {
 
   const dispatch = useDispatch();
   
-  if(!localStorage.getItem("todo")) {
-    localStorage.setItem("todo", JSON.stringify(useSelector((state:RootState) => state.todo)));
+  if(!localStorage.getItem('todo')) {
+    localStorage.setItem('todo', JSON.stringify(useSelector((state:RootState) => state.todo)));
   }
 
   const doItemsList = useSelector((state:RootState) => state.todo.doItemsList);
 
   const doneList = useSelector((state:RootState) => state.todo.doneList);
 
-  const [doInput,setDoInput] = React.useState("");
-
-  const addTodo = () => {
-    dispatch(actions.addTodo(doInput));
-    setDoInput("");
-  };
-
   const updateState = () => {
-    const localState = JSON.parse(localStorage.getItem("todo")|| "");
+    const localState = JSON.parse(localStorage.getItem('todo')|| '');
     dispatch(actions.updateState(localState));
   };
 
@@ -68,12 +61,12 @@ const TodoPage:React.FC = () => {
         <div className='todoPage-container'>
           <nav>
             <GreetingComponent />
-            <div className="addTodo-container">
-              <InputText state={doInput} setState={setDoInput} label='What are you gonna do?'/>
-              <Button text='Add' onClick={addTodo}/>
+            <div className='addTodo-container'>
+              <TodoInput />
+              <Option />
             </div>
           </nav>
-          <div className="list-container">
+          <div className='list-container'>
             <TodoList doCardElement={doItemsListElement}/>
             <DoneList doneCardElement={doneItemsListElement}/>
           </div>

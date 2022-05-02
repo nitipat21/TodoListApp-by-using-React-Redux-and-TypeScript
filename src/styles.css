@@ -8,6 +8,7 @@
     --highlightYellow-todo:#e9ff70;
     --lessbright-White:#ffffffde;
     --lessdark-Black:#000000de;
+    --colorless:#ffffff00;
     --disable-opacity: 0.6;
 }
 
@@ -59,32 +60,19 @@ img{
     gap: 2rem;
 }
 
-
-.inputText-container{
-    display: flex;
-    gap: 0.5rem;
-}
-
-.homePage-containter > div:nth-child(3) > input{
+.usernameText-container input{
     width: 12ch;
 }
 
-.inputText-container label{
-    font-weight: 600;
-}
-
-#inputText, .Button-container button{
+.login-btn button, .usernameText-container input{
     padding: 0.5rem;
     font-size: clamp(1rem, 2.5vw, 2rem);
     border-radius: 1rem;
-    border-color: #000000de;
-}
-
-.Button-container button{
+    border-color: var(--lessdark-Black);
     font-weight: 600;
 }
 
-.Button-container button:hover{
+.login-btn button:hover{
     background-color: var(--lessdark-Black);
     color: var(--lessbright-White);
 }
@@ -111,14 +99,62 @@ nav{
     row-gap: 1rem;
 }
 
-nav > div:last-child > div:first-child > input{
+nav > div:last-child > div:first-child > div:first-child > input{
     text-align: center;
     width: 24ch;
 }
 
 .addTodo-container{
     display: flex;
+    flex-direction: column;
+}
+
+.todoInput-container{
+    display: flex;
     gap: 0.5rem;
+}
+
+.todoInputText-container input, .todoInputButton-container button{
+    padding: 0.5rem;
+    font-size: clamp(1rem, 2.5vw, 2rem);
+    border-radius: 1rem;
+    border-color: var(--lessdark-Black);
+    font-weight: 600;
+}
+
+.todoInputButton-container button:hover{
+    background-color: var(--lessdark-Black);
+    color: var(--lessbright-White);
+}
+
+.options{
+    font-size: 50%;
+    padding: 0.25rem 1rem;
+}
+
+.options-text:hover{
+    text-decoration: underline;
+}
+
+.options-container{
+    display: flex;
+    padding: 0.5rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: #e9ff70;
+    max-width: 100%;
+}
+
+.deadline-checkbox, .fixColor-checkbox{
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+}
+
+.deadline-container, .fixColor-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .greeting-container{
@@ -150,8 +186,18 @@ nav > div:last-child > div:first-child > input{
 }
 
 .todoList-title,.doneList-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
     text-align: center;
     color: var(--lessbright-White);
+}
+
+.clear-btn{
+    padding: 0.5rem;
+    font-weight: 700;
+    height: fit-content;
 }
 
 .doCard-container{

@@ -1,21 +1,7 @@
 import * as React from 'react';
-import ButtonComponent from '../Components/button';
-import InputText from '../Components/InputText';
-import { useNavigate } from 'react-router-dom';
+import LoginInput from '../Components/loginInput';
 
 const HomePage:React.FC = () => {
-
-    const [username,setUsername] = React.useState<string>("");
-    const navigate = useNavigate();
-
-    function saveUserName() {
-        if (username) {
-            localStorage.setItem('username', username);
-            navigate('/todoApp');
-        } else {
-            alert('please type your name')
-        }
-    };
     
     return (
         
@@ -27,8 +13,7 @@ const HomePage:React.FC = () => {
                 <div className='paragraph'>
                     <p>This App made by using React + TypeScript + Pure CSS</p>
                 </div>
-                <InputText state={username} setState={setUsername} label='Username'/>
-                <ButtonComponent text='Enter' onClick={saveUserName}/>
+                <LoginInput />
             </div>
         </main>
     );

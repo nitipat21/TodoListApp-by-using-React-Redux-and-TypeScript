@@ -1,5 +1,4 @@
 import { combineReducers, configureStore, createSlice } from "@reduxjs/toolkit";
-import DoneList from "../Components/doneList";
 
 export interface doItem {
     id:number;
@@ -38,8 +37,9 @@ const todoSlice = createSlice({
                 isEdit: false,
                 isPause: false,
                 doTime: 0,
-                color: state.doCardColorIndex < 3 ? state.doCardColorIndex += 1 : state.doCardColorIndex = 0
+                color: state.doCardColorIndex
             });
+            state.doCardColorIndex < 3 ? state.doCardColorIndex += 1 : state.doCardColorIndex = 0
             localStorage.setItem("todo",JSON.stringify(state));
         },
         removeTodo(state,action) {
@@ -72,14 +72,22 @@ const todoSlice = createSlice({
             state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isStart:false, isPause:false, doTime:0 } : item);
             localStorage.setItem("todo",JSON.stringify(state));
         },
-        updateState(state,action) {
-            state.doCardColorIndex = action.payload.doCardColorIndex;
-            state.doItemsList = action.payload.doItemsList
-            state.doneList = action.payload.doneList
-        },
         updateTime(state,action:{ type:string, payload: {id:number, doTime:number} }) {
             state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload.id ? {...item, doTime:action.payload.doTime} : item);
             localStorage.setItem("todo",JSON.stringify(state));
+        },
+        clearDoList(state) {
+            state.doItemsList = initialState.doItemsList;
+            localStorage.setItem("todo",JSON.stringify(state));
+        },
+        clearDoneList(state) {
+            state.doneList = initialState.doneList;
+            localStorage.setItem("todo",JSON.stringify(state));
+        },
+        updateState(state,action) {
+            state.doCardColorIndex = action.payload.doCardColorIndex;
+            state.doItemsList = action.payload.doItemsList;
+            state.doneList = action.payload.doneList;
         }
     }
 });
