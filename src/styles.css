@@ -60,6 +60,12 @@ img{
     gap: 2rem;
 }
 
+.loginInput-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .usernameText-container input{
     width: 12ch;
 }
@@ -128,11 +134,12 @@ nav > div:last-child > div:first-child > div:first-child > input{
 }
 
 .options{
-    font-size: 50%;
+    font-size: 65%;
     padding: 0.25rem 1rem;
 }
 
 .options-text:hover{
+    cursor: pointer;
     text-decoration: underline;
 }
 
@@ -141,20 +148,29 @@ nav > div:last-child > div:first-child > div:first-child > input{
     padding: 0.5rem;
     flex-direction: column;
     gap: 0.5rem;
-    background-color: #e9ff70;
     max-width: 100%;
+    background-color: var(--lessbright-White);
+    border-radius: 0.5rem;
 }
 
 .deadline-checkbox, .fixColor-checkbox{
     display: flex;
-    gap: 0.25rem;
     align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem;
 }
 
 .deadline-container, .fixColor-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.colorDropdown-container select, .deadlineInput{
+    font-weight: 700;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+    border-color: var(--lessdark-Black);
 }
 
 .greeting-container{
@@ -222,16 +238,36 @@ nav > div:last-child > div:first-child > div:first-child > input{
     background-color: var(--lightBlue-todo);
 }
 
+.text-lightBlue{
+    color: var(--lightBlue-todo);
+}
+
 .lightPink{
     background-color: var(--lightPink-todo);
+}
+
+.text-lightPink{
+    color: var(--lightPink-todo);
 }
 
 .lightOrange{
     background-color: var(--lightOrange-todo);
 }
 
+.text-lightOrange{
+    color: var(--lightOrange-todo);
+}
+
 .lightYellow{
     background-color: var(--lightYellow-todo);
+}
+
+.text-lightYellow{
+    color: var(--lightYellow-todo);
+}
+
+.colorDropDown{
+    background-color: var(--lessdark-Black);
 }
 
 .edit{
@@ -250,6 +286,10 @@ nav > div:last-child > div:first-child > div:first-child > input{
 .done{
     opacity: var(--disable-opacity);
     z-index: -999;
+}
+
+.done-text{
+    text-decoration: line-through;
 }
 
 .timer{

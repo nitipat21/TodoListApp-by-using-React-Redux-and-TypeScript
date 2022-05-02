@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { actions, doItem } from '../store';
 import Timer from './timer';
 
-enum DoCardColor {
+export enum DoCardColor {
   lightPink,
   lightBlue,
   lightOrange,
@@ -91,7 +91,11 @@ const DoCard:React.FC<doItem> = (props) => {
 
     <div className={`doCard-container ${DoCardColor[props.color]} ${props.isDone ? "done" : "" }`}>
       <div className='doCard-doText'>
-        {props.isEdit ? <input type='text' value={editDo} onChange={(event)=>setEditDo(event.target.value)} ref={doRef}/> : <h1>{props.do}</h1> }
+        { props.isEdit ? 
+            <input type='text' value={editDo} onChange={(event)=>setEditDo(event.target.value)} ref={doRef}/> 
+          : 
+            <h1 className={`${props.isDone ? "done-text" : "" }`}>{props.do}</h1> 
+        }
       </div>
       <div className='doCard-button'>
         <div className="timer-button">

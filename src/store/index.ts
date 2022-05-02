@@ -15,12 +15,18 @@ interface todoSliceState {
     doItemsList: doItem[];
     doneList: doItem[];
     doCardColorIndex: number;
+    setDeadline:boolean;
+    setfixColor:boolean;
+    showOptions:boolean;
 }
 
 const initialState: todoSliceState = {
     doItemsList: [],
     doneList: [],
-    doCardColorIndex: 0
+    doCardColorIndex: 0,
+    setDeadline:false,
+    setfixColor:false,
+    showOptions:false
 }
 
 
@@ -39,7 +45,11 @@ const todoSlice = createSlice({
                 doTime: 0,
                 color: state.doCardColorIndex
             });
-            state.doCardColorIndex < 3 ? state.doCardColorIndex += 1 : state.doCardColorIndex = 0
+
+            if (!state.setfixColor) {
+                state.doCardColorIndex < 3 ? state.doCardColorIndex += 1 : state.doCardColorIndex = 0
+            }
+
             localStorage.setItem("todo",JSON.stringify(state));
         },
         removeTodo(state,action) {
@@ -88,6 +98,21 @@ const todoSlice = createSlice({
             state.doCardColorIndex = action.payload.doCardColorIndex;
             state.doItemsList = action.payload.doItemsList;
             state.doneList = action.payload.doneList;
+            state.setDeadline = action.payload.setDeadline;
+            state.setfixColor = action.payload.setfixColor;
+            state.showOptions = action.payload.showOptions;
+        },
+        toggleSetFixColor(state,action) {
+            state.setfixColor = action.payload;
+            localStorage.setItem("todo",JSON.stringify(state));
+        },
+        toggleSetDeadline(state,action) {
+            state.setDeadline = action.payload;
+            localStorage.setItem("todo",JSON.stringify(state));
+        },
+        toggleShowOptions(state,action) {
+            state.showOptions = action.payload;
+            localStorage.setItem("todo",JSON.stringify(state));
         }
     }
 });
