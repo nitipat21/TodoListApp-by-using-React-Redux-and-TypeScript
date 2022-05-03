@@ -224,6 +224,22 @@ nav > div:last-child > div:first-child > div:first-child > input{
     padding: 1rem;
 }
 
+.doCard-editContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.doCard-editContainer input{
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    border-color: var(--lessdark-Black);
+}
+
 .doCard-button{
     display: flex;
     flex-direction: row;

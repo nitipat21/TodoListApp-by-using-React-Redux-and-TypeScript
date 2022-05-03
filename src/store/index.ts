@@ -9,6 +9,7 @@ export interface doItem {
     isPause:boolean;
     doTime:number;
     color:number;
+    doDeadline:string;
 }
 
 interface todoSliceState {
@@ -18,6 +19,7 @@ interface todoSliceState {
     setDeadline:boolean;
     setfixColor:boolean;
     showOptions:boolean;
+    deadlineDate:string;
 }
 
 const initialState: todoSliceState = {
@@ -26,7 +28,8 @@ const initialState: todoSliceState = {
     doCardColorIndex: 0,
     setDeadline:false,
     setfixColor:false,
-    showOptions:false
+    showOptions:false,
+    deadlineDate:""
 }
 
 
@@ -43,7 +46,8 @@ const todoSlice = createSlice({
                 isEdit: false,
                 isPause: false,
                 doTime: 0,
-                color: state.doCardColorIndex
+                color: state.doCardColorIndex,
+                doDeadline:state.deadlineDate
             });
 
             if (!state.setfixColor) {
@@ -54,44 +58,57 @@ const todoSlice = createSlice({
         },
         removeTodo(state,action) {
             state.doItemsList = state.doItemsList.filter((item:doItem) => item.id !== action.payload ? item : "" );
+            
             localStorage.setItem("todo",JSON.stringify(state));
         },
         setIsEdit(state,action) {
             state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isEdit:!item.isEdit } : item);
+            
             localStorage.setItem("todo",JSON.stringify(state));
         },
-        editTodo(state,action:{ type:string, payload: {id:number, newDoText:string} }) {
-            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload.id ? { ...item, do:action.payload.newDoText } : item);
+        editTodo(state,action:{ type:string, payload: {id:number, newDoText:string, newDoDeadline:string, newCardColor:number} }) {
+            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload.id ? 
+            { ...item, do:action.payload.newDoText, doDeadline: action.payload.newDoDeadline, color:action.payload.newCardColor } : item);
+            
             localStorage.setItem("todo",JSON.stringify(state));
         },
         startTodo(state,action) {
             state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isStart:true } : item);
+
             localStorage.setItem("todo",JSON.stringify(state));
         },
         pauseTodo(state,action:{ type:string, payload: {id:number, doTime:number} }) {
             state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload.id ? { ...item, isPause: !item.isPause, doTime:action.payload.doTime } : item);
+            
             localStorage.setItem("todo",JSON.stringify(state));
         },
         doneTodo(state,action:{ type:string, payload: {id:number, doTime:number} }) {
-            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload.id ? { ...item, isDone: true, isPause:true, doTime:action.payload.doTime } : item);
+            state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload.id ? { ...item, isDone: true, isPause:true, doTime:action.payload.doTime, isEdit:false } : item);
+            
             const thisItem = state.doItemsList.filter((item:doItem) => item.id === action.payload.id ? item : "" );
+            
             state.doneList.unshift(...thisItem);
+            
             localStorage.setItem("todo",JSON.stringify(state));
         },
         resetTodo(state,action) {
             state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload ? { ...item, isStart:false, isPause:false, doTime:0 } : item);
+            
             localStorage.setItem("todo",JSON.stringify(state));
         },
         updateTime(state,action:{ type:string, payload: {id:number, doTime:number} }) {
             state.doItemsList = state.doItemsList.map((item:doItem) => item.id === action.payload.id ? {...item, doTime:action.payload.doTime} : item);
+            
             localStorage.setItem("todo",JSON.stringify(state));
         },
         clearDoList(state) {
             state.doItemsList = initialState.doItemsList;
+            
             localStorage.setItem("todo",JSON.stringify(state));
         },
         clearDoneList(state) {
             state.doneList = initialState.doneList;
+            
             localStorage.setItem("todo",JSON.stringify(state));
         },
         updateState(state,action) {
@@ -101,17 +118,39 @@ const todoSlice = createSlice({
             state.setDeadline = action.payload.setDeadline;
             state.setfixColor = action.payload.setfixColor;
             state.showOptions = action.payload.showOptions;
+            state.deadlineDate = action.payload.deadlineDate
         },
         toggleSetFixColor(state,action) {
             state.setfixColor = action.payload;
+
+            if (!state.setfixColor) {
+                state.doCardColorIndex = 0;
+            };
+
             localStorage.setItem("todo",JSON.stringify(state));
         },
         toggleSetDeadline(state,action) {
             state.setDeadline = action.payload;
+
+            if (!state.setDeadline) {
+                state.deadlineDate = "";
+            };
+
             localStorage.setItem("todo",JSON.stringify(state));
         },
         toggleShowOptions(state,action) {
             state.showOptions = action.payload;
+            
+            localStorage.setItem("todo",JSON.stringify(state));
+        },
+        fixCardColor(state,action) {
+            state.doCardColorIndex = action.payload;
+            
+            localStorage.setItem("todo",JSON.stringify(state));
+        },
+        fixDeadlineDate(state,action) {
+            state.deadlineDate = action.payload;
+            
             localStorage.setItem("todo",JSON.stringify(state));
         }
     }

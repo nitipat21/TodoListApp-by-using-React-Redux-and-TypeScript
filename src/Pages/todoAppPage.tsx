@@ -28,6 +28,7 @@ const TodoPage:React.FC = () => {
   const doItemsListElement = doItemsList.map((doItem:doItem) => {
     return  <DoCard  id={doItem.id}
                     do={doItem.do}
+                    doDeadline={doItem.doDeadline}
                     isStart={doItem.isStart}
                     isDone={doItem.isDone}
                     isEdit={doItem.isEdit}
@@ -41,6 +42,7 @@ const TodoPage:React.FC = () => {
   const doneItemsListElement = doneList.map((doneItem:doItem) => {
     return  <DoCard  id={doneItem.id}
                     do={doneItem.do}
+                    doDeadline={doneItem.doDeadline}
                     isStart={doneItem.isStart}
                     isDone={doneItem.isDone}
                     isEdit={doneItem.isEdit}

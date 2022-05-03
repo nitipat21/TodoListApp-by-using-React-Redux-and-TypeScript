@@ -20,6 +20,10 @@ const DoCard:React.FC<doItem> = (props) => {
 
   const [time,setTime] = React.useState<number>(props.doTime);
 
+  const [doDeadline,setDoDeadline] = React.useState<string>(props.doDeadline);
+
+  const [cardColor,setCardColor] = React.useState<any>(props.color);
+
   const removeDoItem = () => {
     dispatch(actions.removeTodo(props.id))
   };
@@ -27,7 +31,7 @@ const DoCard:React.FC<doItem> = (props) => {
   const editDoItem = () => {
 
     if(props.isEdit) {
-      dispatch(actions.editTodo({ id:props.id, newDoText:editDo }));
+      dispatch(actions.editTodo({ id:props.id, newDoText:editDo, newDoDeadline:doDeadline, newCardColor:cardColor }));
     };
 
     dispatch(actions.setIsEdit(props.id));
@@ -85,18 +89,28 @@ const DoCard:React.FC<doItem> = (props) => {
 
   React.useEffect(()=>{
     updateTime();
-  },[time])
+  },[time]);
 
   return (
 
     <div className={`doCard-container ${DoCardColor[props.color]} ${props.isDone ? "done" : "" }`}>
-      <div className='doCard-doText'>
-        { props.isEdit ? 
-            <input type='text' value={editDo} onChange={(event)=>setEditDo(event.target.value)} ref={doRef}/> 
-          : 
-            <h1 className={`${props.isDone ? "done-text" : "" }`}>{props.do}</h1> 
-        }
-      </div>
+      { props.isEdit ? 
+        <div className='doCard-editContainer'>
+          <input className='editDoText' type='text' value={editDo} onChange={(event)=>setEditDo(event.target.value)} ref={doRef}/>
+          <input className='editDoDeadline' type='date' value={doDeadline} onChange={(event)=>setDoDeadline(event.target.value)}/>
+          <select className={`colorDropDown text-${DoCardColor[props.color]}`} name='fixColor' id='fixColor' value={cardColor} onChange={(event)=>setCardColor(event.target.value)}>
+            <option className='text-lightPink' value='0'>Light Pink</option>
+            <option className='text-lightBlue' value='1'>Light Blue</option>
+            <option className='text-lightOrange' value='2'>Light Orange</option>
+            <option className='text-lightYellow' value='3'>Light Yellow</option>
+          </select>
+        </div>
+        :
+        <div className='doCard-doText'>
+        <h1 className={`${props.isDone ? "done-text" : "" }`}>{props.do}</h1>
+        <h3 className={`${props.isDone ? "done-text" : "" }`}>{props.doDeadline}</h3>
+        </div>
+      }
       <div className='doCard-button'>
         <div className="timer-button">
           <button onClick={startDoItem}>{ props.isStart ?  <Timer time={time} /> : 'StartDo' }</button>
