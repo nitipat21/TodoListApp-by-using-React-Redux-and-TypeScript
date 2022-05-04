@@ -10,6 +10,7 @@
     --lessdark-Black:#000000de;
     --colorless:#ffffff00;
     --disable-opacity: 0.6;
+    --warning-red: #FF3232;
 }
 
 
@@ -222,6 +223,13 @@ nav > div:last-child > div:first-child > div:first-child > input{
     justify-content: space-between;
     gap: 1rem;
     padding: 1rem;
+    z-index: 1;
+}
+
+.doCard-deadlineText{
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6rem;
 }
 
 .doCard-editContainer{
@@ -286,11 +294,16 @@ nav > div:last-child > div:first-child > div:first-child > input{
     background-color: var(--lessdark-Black);
 }
 
-.edit{
+.edit,.doneButton{
     background-color: var(--lessdark-Black);
     color: var(--highlightYellow-todo);
     border-color: var(--lessdark-Black);
     font-weight: 700;
+}
+
+.disable{
+    opacity: var(--disable-opacity);
+    z-index: -1;
 }
 
 .timer-button,.utility-button{
@@ -317,16 +330,30 @@ nav > div:last-child > div:first-child > div:first-child > input{
     text-align: center;
 }
 
-/*  */
+.warnDeadline{
+    color: var(--warning-red);
+    background-color: var(--lessdark-Black);
+    text-decoration: underline;
+}
+
+.done-textwarnDeadline{
+    color: var(--warning-red);
+    background-color: var(--lessdark-Black);
+    text-decoration: #000 line-through;
+}
+
+.done-texttodayDeadline{
+    text-decoration: #000 line-through;
+}
 
 .shaking{
     animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
     transform: translate3d(0, 0, 0);
-    color: #FF3232;
+    color: var(--warning-red);
 }
 
 .shaking::placeholder{
-    color: #FF3232;
+    color: var(--warning-red);
 }
 
 @keyframes shake {

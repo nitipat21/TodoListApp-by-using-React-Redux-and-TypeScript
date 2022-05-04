@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
-import { actions, doItem } from '../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { actions, doItem, RootState } from '../store';
 import Timer from './timer';
 
 export enum DoCardColor {
@@ -15,6 +15,8 @@ const DoCard:React.FC<doItem> = (props) => {
   const dispatch = useDispatch();
 
   const doRef = React.useRef<HTMLInputElement>(null);
+
+  const todayDate = useSelector((state:RootState) => state.todo.todayDate);
 
   const [editDo,setEditDo] = React.useState<string>(props.do);
 
@@ -70,6 +72,23 @@ const DoCard:React.FC<doItem> = (props) => {
     dispatch(actions.updateTime({id:props.id,doTime:time}));
   };
 
+  const checkDeadline = () => {
+    if (props.doDeadline) {
+      const thisDoDeadline = parseInt(props.doDeadline.replace(/-/g, ''));
+      const today = parseInt(todayDate.replace(/-/g, ''));
+
+      if (thisDoDeadline - today > 0) {
+        return ''
+      } else if (thisDoDeadline - today === 0) {
+        return 'todayDeadline'
+      } else if (thisDoDeadline - today < 0) {
+        return 'warnDeadline'
+      }
+    } else {
+      return '';
+    }
+  };
+
   React.useEffect(()=>{
     let interval:any;
     
@@ -93,12 +112,12 @@ const DoCard:React.FC<doItem> = (props) => {
 
   return (
 
-    <div className={`doCard-container ${DoCardColor[props.color]} ${props.isDone ? "done" : "" }`}>
+    <div className={`doCard-container ${DoCardColor[props.color]} ${props.isDone ? 'done' : '' }`}>
       { props.isEdit ? 
         <div className='doCard-editContainer'>
           <input className='editDoText' type='text' value={editDo} onChange={(event)=>setEditDo(event.target.value)} ref={doRef}/>
-          <input className='editDoDeadline' type='date' value={doDeadline} onChange={(event)=>setDoDeadline(event.target.value)}/>
-          <select className={`colorDropDown text-${DoCardColor[props.color]}`} name='fixColor' id='fixColor' value={cardColor} onChange={(event)=>setCardColor(event.target.value)}>
+          <input className='editDoDeadline' type='date' value={doDeadline} onChange={(event)=>setDoDeadline(event.target.value)} min={todayDate}/>
+          <select className={`colorDropDown text-${DoCardColor[props.color]}`} value={cardColor} onChange={(event)=>setCardColor(event.target.value)}>
             <option className='text-lightPink' value='0'>Light Pink</option>
             <option className='text-lightBlue' value='1'>Light Blue</option>
             <option className='text-lightOrange' value='2'>Light Orange</option>
@@ -107,20 +126,23 @@ const DoCard:React.FC<doItem> = (props) => {
         </div>
         :
         <div className='doCard-doText'>
-        <h1 className={`${props.isDone ? "done-text" : "" }`}>{props.do}</h1>
-        <h3 className={`${props.isDone ? "done-text" : "" }`}>{props.doDeadline}</h3>
+        <h1 className={`${props.isDone ? 'done-text' : '' }`}>{props.do}</h1>
+        <div className="doCard-deadlineText">
+          <h6>Deadline:</h6>
+          <h3 className={`${props.isDone ? 'done-text' : '' }${checkDeadline()}`}>{checkDeadline() === 'todayDeadline' ? 'today': props.doDeadline}</h3>
+        </div>
         </div>
       }
       <div className='doCard-button'>
-        <div className="timer-button">
-          <button onClick={startDoItem}>{ props.isStart ?  <Timer time={time} /> : 'StartDo' }</button>
-          <button onClick={pauseDoItem}>PauseDo</button>
-          <button onClick={resetDoItem}>ResetDo</button>
+        <div className='timer-button'>
+          <button className={props.isEdit ? 'disable' : ''} onClick={startDoItem}>{ props.isStart ?  <Timer time={time} /> : 'StartDo' }</button>
+          <button className={props.isEdit ? 'disable' : ''} onClick={pauseDoItem}>PauseDo</button>
+          <button className={props.isEdit ? 'disable' : ''} onClick={resetDoItem}>ResetDo</button>
         </div>
-        <div className="utility-button">
-          <button onClick={editDoItem} className={ props.isEdit ? "edit" : "" }>Edit</button>
-          <button onClick={doneDoItem}>Done</button>
-          <button onClick={removeDoItem}>Remove</button>
+        <div className='utility-button'>
+          <button className={props.isEdit ? 'edit' : ''} onClick={editDoItem}>Edit</button>
+          <button className={`${props.isEdit ? 'disable' : ''}${props.isDone ? 'doneButton' : ''}`} onClick={doneDoItem}>Done</button>
+          <button className={props.isEdit ? 'disable' : ''} onClick={removeDoItem}>Remove</button>
         </div>
       </div>
     </div>

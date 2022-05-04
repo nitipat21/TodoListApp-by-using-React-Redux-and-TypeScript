@@ -8,6 +8,8 @@ const DeadlineInput = () => {
 
     const deadlineDate = useSelector((state:RootState) => state.todo.deadlineDate);
 
+    const todayDate = useSelector((state:RootState) => state.todo.todayDate);
+
     const [deadline,setDeadline] = React.useState(deadlineDate);
     
     const handleChange = (event:any) => {
@@ -18,7 +20,7 @@ const DeadlineInput = () => {
     return (
 
         <div className="deadlineInput-container">
-            <input className='deadlineInput' type='date' value={deadline} onChange={handleChange}/>
+            <input className='deadlineInput' type='date' value={deadline} onChange={handleChange} min={todayDate}/>
         </div>
 
     )

@@ -6,20 +6,24 @@ const TodoInput:React.FC = () => {
 
     const dispatch = useDispatch();
 
-    const doItemsListState = useSelector((state:RootState) => state.todo.doItemsList)
+    const doItemsListState = useSelector((state:RootState) => state.todo.doItemsList);
 
-    const [doInput,setDoInput] = React.useState('');
+    const [doInput,setDoInput] = React.useState<string>('');
 
-    const [warnTodoInput,isWarnTodoInput] = React.useState(false);
+    const [warnEmptyInput,isWarnEmptyInput] = React.useState<boolean>(false);
 
     const addTodo = () => {
 
         if(doItemsListState.length === 10 || doInput === '') {
             
-            isWarnTodoInput(true);
+            if (doItemsListState.length === 10) {
+                setDoInput('You reached limit 10 items');
+            } 
 
+            isWarnEmptyInput(true);
             setTimeout(()=> {
-                isWarnTodoInput(false)
+                isWarnEmptyInput(false);
+                setDoInput('');
             },1500);
 
         } else {
@@ -28,13 +32,16 @@ const TodoInput:React.FC = () => {
         }
     } 
     
-    
-
     return (
 
         <div className="todoInput-container">
             <div className='todoInputText-container'>
-                <input className={ warnTodoInput ? 'shaking' : "" } id='inputText'type='text' onChange={(event)=> setDoInput(event.target.value)} value={doInput} placeholder='What are you gonna do?'/>
+                <input  className={ warnEmptyInput ? 'shaking' : "" } 
+                        id='inputText'type='text' 
+                        onChange={(event)=> setDoInput(event.target.value)} 
+                        value={doInput} 
+                        placeholder='What are you gonna do?'
+                />
             </div>
             <div className='todoInputButton-container'>
                 <button type='button' onClick={addTodo}>Add</button>

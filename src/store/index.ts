@@ -20,6 +20,7 @@ interface todoSliceState {
     setfixColor:boolean;
     showOptions:boolean;
     deadlineDate:string;
+    todayDate:string;
 }
 
 const initialState: todoSliceState = {
@@ -29,7 +30,8 @@ const initialState: todoSliceState = {
     setDeadline:false,
     setfixColor:false,
     showOptions:false,
-    deadlineDate:""
+    deadlineDate:"",
+    todayDate:""
 }
 
 
@@ -118,7 +120,8 @@ const todoSlice = createSlice({
             state.setDeadline = action.payload.setDeadline;
             state.setfixColor = action.payload.setfixColor;
             state.showOptions = action.payload.showOptions;
-            state.deadlineDate = action.payload.deadlineDate
+            state.deadlineDate = action.payload.deadlineDate;
+            state.todayDate = action.payload.todayDate;
         },
         toggleSetFixColor(state,action) {
             state.setfixColor = action.payload;
@@ -151,6 +154,11 @@ const todoSlice = createSlice({
         fixDeadlineDate(state,action) {
             state.deadlineDate = action.payload;
             
+            localStorage.setItem("todo",JSON.stringify(state));
+        },
+        updateTodayDate(state,action) {
+            state.todayDate = action.payload;
+
             localStorage.setItem("todo",JSON.stringify(state));
         }
     }
