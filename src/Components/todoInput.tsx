@@ -41,6 +41,7 @@ const TodoInput:React.FC = () => {
                         onChange={(event)=> setDoInput(event.target.value)} 
                         value={doInput} 
                         placeholder='What are you gonna do?'
+                        maxLength={22}
                 />
             </div>
             <div className='todoInputButton-container'>

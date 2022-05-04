@@ -67,13 +67,15 @@ const TodoPage:React.FC = () => {
             />
   });
 
-  React.useEffect(()=>{
+  React.useLayoutEffect(()=>{
+    updateState();
+  },[]);
+
+  React.useEffect(()=> {
     const today = new Date();
     
     dispatch(actions.updateTodayDate(formatDate(today)));
-    
-    updateState();
-  },[])
+  },[]);
 
   return (
       

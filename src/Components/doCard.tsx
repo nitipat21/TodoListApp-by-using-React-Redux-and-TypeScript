@@ -115,7 +115,7 @@ const DoCard:React.FC<doItem> = (props) => {
     <div className={`doCard-container ${DoCardColor[props.color]} ${props.isDone ? 'done' : '' }`}>
       { props.isEdit ? 
         <div className='doCard-editContainer'>
-          <input className='editDoText' type='text' value={editDo} onChange={(event)=>setEditDo(event.target.value)} ref={doRef}/>
+          <input className='editDoText' type='text' value={editDo} onChange={(event)=>setEditDo(event.target.value)} ref={doRef} maxLength={22}/>
           <input className='editDoDeadline' type='date' value={doDeadline} onChange={(event)=>setDoDeadline(event.target.value)} min={todayDate}/>
           <select className={`colorDropDown text-${DoCardColor[props.color]}`} value={cardColor} onChange={(event)=>setCardColor(event.target.value)}>
             <option className='text-lightPink' value='0'>Light Pink</option>
@@ -126,11 +126,14 @@ const DoCard:React.FC<doItem> = (props) => {
         </div>
         :
         <div className='doCard-doText'>
-        <h1 className={`${props.isDone ? 'done-text' : '' }`}>{props.do}</h1>
-        <div className="doCard-deadlineText">
-          <h6>Deadline:</h6>
-          <h3 className={`${props.isDone ? 'done-text' : '' }${checkDeadline()}`}>{checkDeadline() === 'todayDeadline' ? 'today': props.doDeadline}</h3>
-        </div>
+          <h3 className={`${props.isDone ? 'done-text' : '' }`}>{props.do}</h3>
+          { props.doDeadline ? 
+            <div className="doCard-deadlineText">
+              <h6>Deadline:</h6>
+              <h5 className={`${props.isDone ? 'done-text' : '' }${checkDeadline()}`}>{checkDeadline() === 'todayDeadline' ? 'today': props.doDeadline}</h5>
+            </div>
+            : ""
+          }
         </div>
       }
       <div className='doCard-button'>
