@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions, doItem, RootState } from '../store';
+import { FaStopwatch, FaPause, FaPlay, FaHistory, FaRegEdit,FaCheck, FaTimes } from "react-icons/fa";
 import Timer from './timer';
 
 export enum DoCardColor {
@@ -138,14 +139,14 @@ const DoCard:React.FC<doItem> = (props) => {
       }
       <div className='doCard-button'>
         <div className='timer-button'>
-          <button className={props.isEdit ? 'disable' : ''} onClick={startDoItem}>{ props.isStart ?  <Timer time={time} /> : 'StartDo' }</button>
-          <button className={props.isEdit ? 'disable' : ''} onClick={pauseDoItem}>PauseDo</button>
-          <button className={props.isEdit ? 'disable' : ''} onClick={resetDoItem}>ResetDo</button>
+          <button className={props.isEdit ? 'disable' : ''} onClick={startDoItem}>{ props.isStart ?  <Timer time={time} /> : <FaStopwatch /> }</button>
+          <button className={props.isEdit ? 'disable' : ''} onClick={pauseDoItem}>{ props.isPause ? <FaPlay /> : <FaPause />}</button>
+          <button className={props.isEdit ? 'disable' : ''} onClick={resetDoItem}><FaHistory /></button>
         </div>
         <div className='utility-button'>
-          <button className={props.isEdit ? 'edit' : ''} onClick={editDoItem}>Edit</button>
-          <button className={`${props.isEdit ? 'disable' : ''}${props.isDone ? 'doneButton' : ''}`} onClick={doneDoItem}>Done</button>
-          <button className={props.isEdit ? 'disable' : ''} onClick={removeDoItem}>Remove</button>
+          <button className={props.isEdit ? 'edit' : ''} onClick={editDoItem}><FaRegEdit /></button>
+          <button className={`${props.isEdit ? 'disable' : ''}${props.isDone ? 'doneButton' : ''}`} onClick={doneDoItem}><FaCheck /></button>
+          <button className={props.isEdit ? 'disable' : ''} onClick={removeDoItem}><FaTimes /></button>
         </div>
       </div>
     </div>

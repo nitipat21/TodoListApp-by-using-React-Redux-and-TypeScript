@@ -20,6 +20,8 @@ const TodoPage:React.FC = () => {
 
   const doneList = useSelector((state:RootState) => state.todo.doneList);
 
+  const onPage = useSelector((state:RootState) => state.todo.onPage);
+
   const updateState = () => {
     const localState = JSON.parse(localStorage.getItem('todo')|| '');
     dispatch(actions.updateState(localState));
@@ -88,7 +90,7 @@ const TodoPage:React.FC = () => {
               <Option />
             </div>
           </nav>
-          <div className='list-container'>
+          <div className={`list-container ${onPage}`}>
             <TodoList doCardElement={doItemsListElement}/>
             <DoneList doneCardElement={doneItemsListElement}/>
           </div>

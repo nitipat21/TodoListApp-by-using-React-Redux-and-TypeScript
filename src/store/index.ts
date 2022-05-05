@@ -21,6 +21,7 @@ interface todoSliceState {
     showOptions:boolean;
     deadlineDate:string;
     todayDate:string;
+    onPage:string;
 }
 
 const initialState: todoSliceState = {
@@ -31,7 +32,8 @@ const initialState: todoSliceState = {
     setfixColor:false,
     showOptions:false,
     deadlineDate:"",
-    todayDate:""
+    todayDate:"",
+    onPage:""
 }
 
 
@@ -158,6 +160,11 @@ const todoSlice = createSlice({
         },
         updateTodayDate(state,action) {
             state.todayDate = action.payload;
+
+            localStorage.setItem("todo",JSON.stringify(state));
+        },
+        slidePageTo(state,action) {
+            state.onPage = action.payload;
 
             localStorage.setItem("todo",JSON.stringify(state));
         }

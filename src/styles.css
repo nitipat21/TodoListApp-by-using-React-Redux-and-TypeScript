@@ -11,6 +11,7 @@
     --colorless:#ffffff00;
     --disable-opacity: 0.6;
     --warning-red: #FF3232;
+    --correct-green: #77DD77;
 }
 
 
@@ -45,7 +46,7 @@ img{
     min-height: 80vh;
     width: 80%;
     margin: 2rem auto;
-    font-size: clamp(1.5rem, 2.5vw, 4rem);
+    font-size: clamp(1rem, 2.5vw, 4rem);
     border-radius: 1rem;
     box-shadow: 0px 0px 10px 2px var(--lessdark-Black);
     background-color: var(--lessbright-White);
@@ -118,6 +119,7 @@ nav > div:last-child > div:first-child > div:first-child > input{
 
 .todoInput-container{
     display: flex;
+    align-items: center;
     gap: 0.5rem;
 }
 
@@ -127,11 +129,19 @@ nav > div:last-child > div:first-child > div:first-child > input{
     border-radius: 1rem;
     border-color: var(--lessdark-Black);
     font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.todoInputButton-container button{
+    background-color: var(--lessdark-Black);
+    color: var(--lessbright-White);
+    border-style: none;
 }
 
 .todoInputButton-container button:hover{
-    background-color: var(--lessdark-Black);
-    color: var(--lessbright-White);
+    color: var(--highlightYellow-todo);
+    animation: rotation 1s 1 ease-in-out;
 }
 
 .options{
@@ -215,7 +225,17 @@ nav > div:last-child > div:first-child > div:first-child > input{
 .clear-btn{
     padding: 0.5rem;
     font-weight: 700;
+    font-size: 2rem;
     height: fit-content;
+    display: flex;
+    justify-content: center;
+    border-style: none;
+    border-radius: 0.25rem;
+}
+
+.clear-btn:hover{
+    background-color: var(--colorless);
+    color: var(--lessbright-White);
 }
 
 .doCard-container{
@@ -266,7 +286,12 @@ nav > div:last-child > div:first-child > div:first-child > input{
 }
 
 .doCard-button button{
-    padding: 0.5rem;
+    border-radius: 2rem;
+    border-style: var(--colorless);
+    width: 5.325rem;
+    font-size: 1.25rem;
+    height: 2.5rem;
+    padding-top: 0.25rem;
 }
 
 .lightBlue{
@@ -321,6 +346,7 @@ nav > div:last-child > div:first-child > div:first-child > input{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 0.5rem;
 }
 
@@ -333,13 +359,44 @@ nav > div:last-child > div:first-child > div:first-child > input{
     text-decoration: line-through;
 }
 
-.timer{
+.timer-button button:first-child{
     display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 65%;
+    padding: 0;
 }
 
-.timer > span{
+.timer{
     width: 100%;
-    text-align: center;
+}
+
+.LeftArrow{
+    display: none;
+    position: absolute;
+    top: 2.5%;
+    left: 2.5%;
+    color: var(--lessdark-Black);
+}
+
+.leftArrow:hover,.rightArrow:hover{
+    color: var(--lessbright-White);
+}
+
+.rightArrow{
+    display: none;
+    position: absolute;
+    top: 2.5%;
+    right: 2.5%;
+    color: var(--lessdark-Black);
+}
+
+.slideLeft{
+    transform: translateX(100%);
+}
+
+.slideRight{
+    transform: translateX(-100%);
 }
 
 .warnDeadline{
@@ -386,7 +443,27 @@ nav > div:last-child > div:first-child > div:first-child > input{
     }
 }
 
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
+
 /* media screen */
+
+@media only screen and (max-width: 340px) {
+    .todoInput-container{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .options-text{
+        text-align: center;
+    }
+}
 
 @media only screen and (max-width: 480px) {
 
@@ -409,12 +486,27 @@ nav > div:last-child > div:first-child > div:first-child > input{
         justify-content: center;
         width: 100%;
     }
+
+    .todoList-title,.doneList-title{
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .todoList-container,.doneList-container{
+        gap: 2rem;
+    }
 }
 
 @media only screen and (max-width: 1024px) {
 
-    .list-container{
-        overflow-x: auto;
+    .todoListPage{
+        transform: translateX(0vw);
+        transition: transform 500ms ease-in-out 25ms;
+    }
+
+    .doneListPage{
+        transform:  translateX(-100vw);
+        transition: transform 500ms ease-in-out 25ms;
     }
 
     .todoList-container,.doneList-container{
@@ -426,6 +518,10 @@ nav > div:last-child > div:first-child > div:first-child > input{
     .doCard-container{
         max-width: 34.75rem;
         margin: 0 auto;
+    }
+
+    .LeftArrow, .rightArrow{
+        display: unset;
     }
     
 }

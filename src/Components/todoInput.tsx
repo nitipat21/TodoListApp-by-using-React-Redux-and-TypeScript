@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions, RootState } from '../store';
+import { FaPlus } from "react-icons/fa";
 
 const TodoInput:React.FC = () => {
 
@@ -15,17 +16,17 @@ const TodoInput:React.FC = () => {
     const addTodo = () => {
 
         if(doItemsListState.length === 10 || doInput === '') {
-            
-            if (doItemsListState.length === 10) {
-                setDoInput('You reached limit 10 items');
-            } 
-
-            isWarnEmptyInput(true);
-            setTimeout(()=> {
-                isWarnEmptyInput(false);
-                setDoInput('');
-            },1500);
-
+            if (!warnEmptyInput) {
+                if (doItemsListState.length === 10) {
+                    setDoInput('You reached limit 10 items');
+                } 
+    
+                isWarnEmptyInput(true);
+                setTimeout(()=> {
+                    isWarnEmptyInput(false);
+                    setDoInput('');
+                },1500);
+            }
         } else {
             dispatch(actions.addTodo(doInput));
             setDoInput('');
@@ -45,7 +46,7 @@ const TodoInput:React.FC = () => {
                 />
             </div>
             <div className='todoInputButton-container'>
-                <button type='button' onClick={addTodo}>Add</button>
+                <button type='button' onClick={addTodo}><FaPlus /></button>
             </div>
         </div>
 
