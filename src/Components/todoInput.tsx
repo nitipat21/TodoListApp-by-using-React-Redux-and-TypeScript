@@ -30,6 +30,10 @@ const TodoInput:React.FC = () => {
         } else {
             dispatch(actions.addTodo(doInput));
             setDoInput('');
+            dispatch(actions.changeAlertText(`${doInput} is added`));
+            setTimeout(()=>{
+                dispatch(actions.changeAlertText(''));
+            },1500)
         }
     } 
     

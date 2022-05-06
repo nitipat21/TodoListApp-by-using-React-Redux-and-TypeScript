@@ -29,12 +29,21 @@ const DoCard:React.FC<doItem> = (props) => {
 
   const removeDoItem = () => {
     dispatch(actions.removeTodo(props.id))
+    dispatch(actions.changeAlertText(`${props.do} is removed`));
+    setTimeout(()=>{
+      dispatch(actions.changeAlertText(''));
+    },2000)
   };
 
   const editDoItem = () => {
 
     if(props.isEdit) {
       dispatch(actions.editTodo({ id:props.id, newDoText:editDo, newDoDeadline:doDeadline, newCardColor:cardColor }));
+      dispatch(actions.changeAlertText(`${props.do} is edited`));
+
+      setTimeout(()=>{
+        dispatch(actions.changeAlertText(''));
+      },2000)
     };
 
     dispatch(actions.setIsEdit(props.id));
@@ -47,18 +56,37 @@ const DoCard:React.FC<doItem> = (props) => {
     if (!props.isDone) {
       dispatch(actions.doneTodo({id:props.id, doTime:time}));
       dispatch(actions.removeTodo(props.id));
+      dispatch(actions.changeAlertText(`${props.do} is done`));
+      setTimeout(()=>{
+        dispatch(actions.changeAlertText(''));
+      },2000)
     }
   };
 
   const startDoItem = () => {
     if (!props.isStart) {
       dispatch(actions.startTodo(props.id));
+      dispatch(actions.changeAlertText(`Start to ${props.do}`));
+      setTimeout(()=>{
+        dispatch(actions.changeAlertText(''));
+      },2000)
     }
   };
 
   const pauseDoItem = () => {
     if (props.isStart) {
       dispatch(actions.pauseTodo({id:props.id, doTime:time}));
+      if (!props.isPause) {
+        dispatch(actions.changeAlertText(`${props.do} is paused`));
+        setTimeout(()=>{
+          dispatch(actions.changeAlertText(''));
+        },2000)
+      } else {
+        dispatch(actions.changeAlertText(`${props.do} is resumed`));
+        setTimeout(()=>{
+          dispatch(actions.changeAlertText(''));
+        },2000)
+      }
     } 
   };
 
@@ -66,6 +94,10 @@ const DoCard:React.FC<doItem> = (props) => {
     if (props.isStart) {
       dispatch(actions.resetTodo(props.id));
       setTime(0);
+      dispatch(actions.changeAlertText(`${props.do} is reset`));
+      setTimeout(()=>{
+        dispatch(actions.changeAlertText(''));
+      },2000)
     }
   };
 
@@ -139,14 +171,14 @@ const DoCard:React.FC<doItem> = (props) => {
       }
       <div className='doCard-button'>
         <div className='timer-button'>
-          <button className={props.isEdit ? 'disable' : ''} onClick={startDoItem}>{ props.isStart ?  <Timer time={time} /> : <FaStopwatch /> }</button>
-          <button className={props.isEdit ? 'disable' : ''} onClick={pauseDoItem}>{ props.isPause ? <FaPlay /> : <FaPause />}</button>
-          <button className={props.isEdit ? 'disable' : ''} onClick={resetDoItem}><FaHistory /></button>
+          <button className={props.isEdit ? 'disable' : 'startDoButton'} onClick={startDoItem}>{ props.isStart ?  <Timer time={time} /> : <FaStopwatch className='watch'/> }</button>
+          <button className={props.isEdit ? 'disable' : 'pauseDoButton'} onClick={pauseDoItem}>{ props.isPause ? <FaPlay  className='play'/> : <FaPause className='pause'/>}</button>
+          <button className={props.isEdit ? 'disable' : 'resetDoButton'} onClick={resetDoItem}><FaHistory className='reset'/></button>
         </div>
         <div className='utility-button'>
-          <button className={props.isEdit ? 'edit' : ''} onClick={editDoItem}><FaRegEdit /></button>
-          <button className={`${props.isEdit ? 'disable' : ''}${props.isDone ? 'doneButton' : ''}`} onClick={doneDoItem}><FaCheck /></button>
-          <button className={props.isEdit ? 'disable' : ''} onClick={removeDoItem}><FaTimes /></button>
+          <button className={props.isEdit ? 'edit' : 'editDoButton'} onClick={editDoItem}><FaRegEdit className='editIcon'/></button>
+          <button className={`${props.isEdit ? 'disable' : 'doneDoButton'}${props.isDone ? 'doneButton' : ''}`} onClick={doneDoItem}><FaCheck className='check'/></button>
+          <button className={props.isEdit ? 'disable' : 'removeDoButtom'} onClick={removeDoItem}><FaTimes className='cross'/></button>
         </div>
       </div>
     </div>

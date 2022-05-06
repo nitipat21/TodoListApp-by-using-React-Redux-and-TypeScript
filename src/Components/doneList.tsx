@@ -15,12 +15,20 @@ export interface doneListInterface{
     dispatch(actions.slidePageTo('todoListPage'))
   }
 
+  const clearList = () => {
+    dispatch(actions.clearDoneList())
+    dispatch(actions.changeAlertText(`Done List is cleared`));
+    setTimeout(()=>{
+      dispatch(actions.changeAlertText(''));
+    },1500)
+  }
+
   return (
 
     <div className='doneList-container'>
          <div className="doneList-title">
            <h1>DONE LIST</h1>
-           <button className='clear-btn' onClick={()=>dispatch(actions.clearDoneList())} ><FaTrash /></button>
+           <button className='clear-btn' onClick={clearList} ><FaTrash /></button>
         </div>
         {props.doneCardElement}
         <h1 className='LeftArrow' onClick={slideToNextPage}>{'<'}</h1>

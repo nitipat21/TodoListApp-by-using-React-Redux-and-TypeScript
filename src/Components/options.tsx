@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions, RootState } from '../store';
+import { FaWrench } from "react-icons/fa";
 import ColorDropdown from './colorDropdown';
 import DeadlineInput from './deadlineInput';
 
 const Option:React.FC = () => {
 
     const dispatch = useDispatch();
+
+    const alertText = useSelector((state:RootState) => state.todo.alertText);
 
     const checkedDeadlineState = useSelector((state:RootState) => state.todo.setDeadline);
 
@@ -29,7 +32,8 @@ const Option:React.FC = () => {
   return (
             <div className="options">
               <div className="options-text">
-                <h6 onClick={toggleShowOptions}><span>{showOptionsState ? '- ' : '+ '}</span>more options</h6>
+                <h6 onClick={toggleShowOptions}><FaWrench className={showOptionsState ? 'wrench showOption' : 'wrench closeOption'}/></h6>
+                <h6 className={alertText ? '' : 'hide'}>{alertText}</h6>
               </div>
               {showOptionsState && 
                 <div className='options-container'>

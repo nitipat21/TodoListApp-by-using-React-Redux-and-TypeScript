@@ -38,6 +38,10 @@ img{
     max-width: 100%;
     max-height: 100%;
 }
+
+button{
+    cursor: pointer;
+}
 /* close initial setup */
 
 .homePage{
@@ -140,8 +144,8 @@ nav > div:last-child > div:first-child > div:first-child > input{
 }
 
 .todoInputButton-container button:hover{
-    color: var(--highlightYellow-todo);
-    animation: rotation 1s 1 ease-in-out;
+    transform: translateY(-7.5px) scale(1.05);
+    transition: transform 250ms ease-in-out 25ms;
 }
 
 .options{
@@ -149,9 +153,43 @@ nav > div:last-child > div:first-child > div:first-child > input{
     padding: 0.25rem 1rem;
 }
 
-.options-text:hover{
+.options-text{
+    padding-top: 0.5rem;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.options-text h6:nth-child(2){
+    color: var(--highlightYellow-todo);
+    background-color: var(--lessdark-Black);
+    font-size: clamp(0.75rem, 1.5vw, 1.25rem);
+    padding: 0.25rem 1.5rem;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 0px 5px var(--lessdark-Black);
+}
+
+.wrench:hover{
+    transform: scale(1.2) rotate(45deg);
     cursor: pointer;
-    text-decoration: underline;
+}
+
+.hide{
+    display: none;
+}
+
+.showOption{
+    transform: rotate(45deg);
+    transition: transform 250ms ease-in-out 25ms;
+}
+
+.closeOption{
+    transform: rotate(0deg);
+    transition: transform 250ms ease-in-out 25ms;
 }
 
 .options-container{
@@ -162,6 +200,7 @@ nav > div:last-child > div:first-child > div:first-child > input{
     max-width: 100%;
     background-color: var(--lessbright-White);
     border-radius: 0.5rem;
+    transition: transform 250ms ease-in-out 25ms;
 }
 
 .deadline-checkbox, .fixColor-checkbox{
@@ -246,6 +285,13 @@ nav > div:last-child > div:first-child > div:first-child > input{
     padding: 1rem;
     z-index: 1;
     width: 100%;
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    border-radius: 1rem;
+}
+
+.doCard-container:hover{
+    transform: scale(1.05);
+    box-shadow:10px 10px 7px rgba(0,0,0,.7);
 }
 
 .doCard-doText{
@@ -292,6 +338,27 @@ nav > div:last-child > div:first-child > div:first-child > input{
     font-size: 1.25rem;
     height: 2.5rem;
     padding-top: 0.25rem;
+}
+
+.doCard-button button:hover{
+    color: var(--lessbright-White);
+    background-color: var(--lessdark-Black);
+}
+
+.watch:hover,.reset:hover,.editIcon:hover{
+    color: var(--highlightYellow-todo);
+}
+
+.play:hover,.check:hover{
+    color: var(--correct-green);
+}
+
+.pause:hover{
+    color: var(--highlightYellow-todo);
+}
+
+.cross:hover{
+    color: var(--warning-red);
 }
 
 .lightBlue{
@@ -363,7 +430,7 @@ nav > div:last-child > div:first-child > div:first-child > input{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 65%;
+    font-size: 1rem;
     padding: 0;
 }
 
@@ -379,7 +446,7 @@ nav > div:last-child > div:first-child > div:first-child > input{
     color: var(--lessdark-Black);
 }
 
-.leftArrow:hover,.rightArrow:hover{
+.LeftArrow:hover, .rightArrow:hover{
     color: var(--lessbright-White);
 }
 
@@ -443,15 +510,6 @@ nav > div:last-child > div:first-child > div:first-child > input{
     }
 }
 
-@keyframes rotation {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(359deg);
-    }
-  }
-
 /* media screen */
 
 @media only screen and (max-width: 340px) {
@@ -466,10 +524,6 @@ nav > div:last-child > div:first-child > div:first-child > input{
 }
 
 @media only screen and (max-width: 480px) {
-
-    nav{
-        flex-direction: column;
-    }
 
     .doCard-container{
         flex-direction: column;
@@ -499,6 +553,10 @@ nav > div:last-child > div:first-child > div:first-child > input{
 
 @media only screen and (max-width: 1024px) {
 
+    nav{
+        flex-direction: column;
+    }
+
     .todoListPage{
         transform: translateX(0vw);
         transition: transform 500ms ease-in-out 25ms;
@@ -515,6 +573,7 @@ nav > div:last-child > div:first-child > div:first-child > input{
         max-width: 100vw;
     }
 
+
     .doCard-container{
         max-width: 34.75rem;
         margin: 0 auto;
@@ -528,13 +587,7 @@ nav > div:last-child > div:first-child > div:first-child > input{
 
 @media only screen and (min-width: 1440px) {
     main{
-        width: 90%;
+        max-width: 160rem;
         margin: 0 auto;
-    }
-}
-
-@media only screen and (min-width: 2000px) {
-    main{
-        width: 85%;
     }
 }

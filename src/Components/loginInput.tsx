@@ -28,7 +28,13 @@ const LoginInput:React.FC = () => {
 
         <div className="loginInput-container">
             <div className='usernameText-container'>
-                <input className={ isWarnUsername ? 'shaking' : '' } id='usernameText'type='text' onChange={(event)=> setUsername(event.target.value)} value={username} placeholder='Username'/>
+                <input  className={ isWarnUsername ? 'shaking' : '' } 
+                        id='usernameText'
+                        type='text' 
+                        onChange={(event)=> setUsername(event.target.value)} 
+                        value={username} 
+                        placeholder='Username'
+                        maxLength={12}/>
             </div>
             <div className='login-btn'>
                 <button type='button' onClick={saveUserName}>Login</button>
