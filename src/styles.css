@@ -553,6 +553,10 @@ nav > div:last-child > div:first-child > div:first-child > input{
 
 @media only screen and (max-width: 1024px) {
 
+    body{
+        overflow-x: hidden;
+    }
+
     nav{
         flex-direction: column;
     }
