@@ -25,7 +25,7 @@ const TodoInput:React.FC = () => {
                 setTimeout(()=> {
                     isWarnEmptyInput(false);
                     setDoInput('');
-                },1500);
+                },2000);
             }
         } else {
             dispatch(actions.addTodo(doInput));
@@ -33,7 +33,7 @@ const TodoInput:React.FC = () => {
             dispatch(actions.changeAlertText(`${doInput} is added`));
             setTimeout(()=>{
                 dispatch(actions.changeAlertText(''));
-            },1500)
+            },2000)
         }
     } 
     

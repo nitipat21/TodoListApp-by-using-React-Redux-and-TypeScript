@@ -20,7 +20,7 @@ export interface todoListInterface{
     dispatch(actions.changeAlertText(`Do List is cleared`));
     setTimeout(()=>{
       dispatch(actions.changeAlertText(''));
-    },1500)
+    },2000)
   }
 
   return (
