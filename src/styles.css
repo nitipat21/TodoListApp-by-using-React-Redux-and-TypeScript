@@ -113,7 +113,7 @@ nav{
 
 nav > div:last-child > div:first-child > div:first-child > input{
     text-align: center;
-    width: 24ch;
+    width: 26ch;
 }
 
 .addTodo-container{
@@ -441,8 +441,7 @@ nav > div:last-child > div:first-child > div:first-child > input{
 .LeftArrow{
     display: none;
     position: absolute;
-    top: 2rem;
-    left: 0.25rem;
+    left: 2vw;
     color: var(--lessdark-Black);
 }
 
@@ -453,8 +452,7 @@ nav > div:last-child > div:first-child > div:first-child > input{
 .rightArrow{
     display: none;
     position: absolute;
-    top: 2rem;
-    right: 0.25rem;
+    right: 2vw;
     color: var(--lessdark-Black);
 }
 
