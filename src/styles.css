@@ -441,8 +441,8 @@ nav > div:last-child > div:first-child > div:first-child > input{
 .LeftArrow{
     display: none;
     position: absolute;
-    top: 2.5%;
-    left: 2.5%;
+    top: 2rem;
+    left: 0.25rem;
     color: var(--lessdark-Black);
 }
 
@@ -453,8 +453,8 @@ nav > div:last-child > div:first-child > div:first-child > input{
 .rightArrow{
     display: none;
     position: absolute;
-    top: 2.5%;
-    right: 2.5%;
+    top: 2rem;
+    right: 0.25rem;
     color: var(--lessdark-Black);
 }
 
